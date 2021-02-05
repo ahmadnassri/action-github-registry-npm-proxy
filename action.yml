@@ -1,4 +1,4 @@
-name: setup npm registry
+name: Github Package Registry npm Proxy
 description: setup npm to use GPR as proxy
 
 branding:
