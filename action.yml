@@ -1,0 +1,25 @@
+name: setup npm registry
+description: setup npm to use GPR as proxy
+
+branding:
+  icon: package
+  color: red
+
+inputs:
+  path:
+    description: path to write .npmrc file
+    default: ${{ github.workspace	}}
+
+  owner:
+    description: the github owner / org name to proxy through
+    default: ${{ github.repository_owner }}
+
+  github-token:
+    description: github token to use with npm
+    default: ${{ github.token }}
+
+runs:
+  using: composite
+  steps:
+    - run: ${{ github.action_path }}/npmrc.sh ${{ inputs.path }} ${{ inputs.owner }} ${{ inputs.github-token }}
+      shell: bash

@@ -1,0 +1,8 @@
+version: 2.0
+
+id: action-github-registry-npm-proxy
+
+about:
+  title: GitHub Package Registry as a proxy
+  description: sets up an .npmrc file that points to GPR as a proxy
+  repository: ahmadnassri/action-github-registry-npm-proxy

@@ -1,0 +1,32 @@
+Allows you to use the [GitHub Package Registry as a proxy](https://github.blog/2019-09-11-proxying-packages-with-github-package-registry-and-other-updates/) for npm operations _(install, publish, etc ...)_ so you don't have to manually distinguish between internal dependencies registry url and public ones.
+
+## Usage
+
+```yaml
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: configure npm registry proxy
+        uses: ahmadnassri/action-github-registry-npm-proxy@v1
+        with:
+          github-token: ${{ secrets.my-personal-access-token }}
+          owner: ${{ github.repository_owner }}
+          path: ${{ github.workspace }}
+```
+
+### Inputs
+
+| input        | required | default                          | description                                                             |
+| ------------ | -------- | -------------------------------- | ----------------------------------------------------------------------- |
+| github-token | ❌        | `${{ github.token }}`            | the token to use with npm cli                                           |
+| owner        | ❌        | `${{ github.repository_owner }}` | the "npm scope", typically this will be your GitHub username / org name |
+| path         | ❌        | `${{ github.workspace }} `       | where to store the `.npmrc` file                                        |
+
+> _**Note**: your github token should have the [appropriate scopes](https://docs.github.com/en/packages/guides/about-github-container-registry#about-scopes-and-permissions-for-github-container-registry)_
