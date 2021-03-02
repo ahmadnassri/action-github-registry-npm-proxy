@@ -8,18 +8,21 @@ branding:
 inputs:
   path:
     description: path to write .npmrc file
-    default: ${{ github.workspace	}}
+    default: ${{ github.workspace	}}/.npmrc
 
-  owner:
+  scope:
     description: the github owner / org name to proxy through
     default: ${{ github.repository_owner }}
 
-  github-token:
+  token:
     description: github token to use with npm
     default: ${{ github.token }}
 
 runs:
   using: composite
   steps:
-    - run: ${{ github.action_path }}/npmrc.sh ${{ inputs.path }} ${{ inputs.owner }} ${{ inputs.github-token }}
-      shell: bash
+    - shell: bash
+      run: |
+        npm config --userconfig "${{ inputs.path }}" set registry="https://npm.pkg.github.com/${{ inputs.scope }}"
+        npm config --userconfig "${{ inputs.path }}" set //npm.pkg.github.com/:_authToken "${{ inputs.token }}"
+        npm config --userconfig "${{ inputs.path }}" set always-auth true

@@ -14,19 +14,19 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: configure npm registry proxy
-        uses: ahmadnassri/action-github-registry-npm-proxy@v1
+        uses: ahmadnassri/action-github-registry-npm-proxy@v2
         with:
-          github-token: ${{ secrets.my-personal-access-token }}
-          owner: ${{ github.repository_owner }}
-          path: ${{ github.workspace }}
+          token: ${{ secrets.my-personal-access-token }}
+          scope: ${{ github.repository_owner }}
+          path: ${{ github.workspace }}/.npmrc
 ```
 
 ### Inputs
 
-| input        | required | default                          | description                                                             |
-| ------------ | -------- | -------------------------------- | ----------------------------------------------------------------------- |
-| github-token | ❌        | `${{ github.token }}`            | the token to use with npm cli                                           |
-| owner        | ❌        | `${{ github.repository_owner }}` | the "npm scope", typically this will be your GitHub username / org name |
-| path         | ❌        | `${{ github.workspace }} `       | where to store the `.npmrc` file                                        |
+| input | required | default                          | description                                                             |
+| ----- | -------- | -------------------------------- | ----------------------------------------------------------------------- |
+| token | ❌        | `${{ github.token }}`            | the token to use with npm cli                                           |
+| scope | ❌        | `${{ github.repository_owner }}` | the "npm scope", typically this will be your GitHub username / org name |
+| path  | ❌        | `${{ github.workspace }}/.npmrc` | where to store the `.npmrc` file                                        |
 
 > _**Note**: your github token should have the [appropriate scopes](https://docs.github.com/en/packages/guides/about-github-container-registry#about-scopes-and-permissions-for-github-container-registry)_
