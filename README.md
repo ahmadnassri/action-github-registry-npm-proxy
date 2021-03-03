@@ -28,15 +28,17 @@ jobs:
           token: ${{ secrets.my-personal-access-token }}
           scope: ${{ github.repository_owner }}
           path: ${{ github.workspace }}/.npmrc
+          export_user_config: 'true'
 ```
 
 ### Inputs
 
-| input | required | default                          | description                                                             |
-|-------|----------|----------------------------------|-------------------------------------------------------------------------|
-| token | ❌        | `${{ github.token }}`            | the token to use with npm cli                                           |
-| scope | ❌        | `${{ github.repository_owner }}` | the "npm scope", typically this will be your GitHub username / org name |
-| path  | ❌        | `${{ github.workspace }}/.npmrc` | where to store the `.npmrc` file                                        |
+| input               | required | default                          | description                                                             |
+|---------------------|----------|----------------------------------|-------------------------------------------------------------------------|
+| token               | ❌        | `${{ github.token }}`            | the token to use with npm cli                                           |
+| scope               | ❌        | `${{ github.repository_owner }}` | the "npm scope", typically this will be your GitHub username / org name |
+| path                | ❌        | `${{ github.workspace }}/.npmrc` | where to store the `.npmrc` file                                        |
+| export_user_config  | ❌        | `false`                          | export the path to `.npmrc` as `NPM_CONFIG_USERCONFIG`                  |
 
 > ***Note**: your github token should have the [appropriate scopes](https://docs.github.com/en/packages/guides/about-github-container-registry#about-scopes-and-permissions-for-github-container-registry)*
 
