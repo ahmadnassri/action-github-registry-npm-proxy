@@ -36,7 +36,7 @@ runs:
         npm config --userconfig "${{ inputs.path }}" set always-auth true
 
         if [ "${{ inputs.proxy }}" != "true" ]; then
-          npm config --userconfig "${{ inputs.path }}" set @${{ inputs.scope }}:registry="https://npm.pkg.github.com/${{ inputs.scope }}"
+          npm config --userconfig "${{ inputs.path }}" set @${{ inputs.scope }}:registry="https://npm.pkg.github.com"
         else
           npm config --userconfig "${{ inputs.path }}" set registry="https://npm.pkg.github.com/${{ inputs.scope }}"
         fi
