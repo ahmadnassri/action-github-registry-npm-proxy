@@ -20,7 +20,7 @@ inputs:
 
   proxy:
     description: enable proxy mode
-    default: 'true'
+    default: 'false'
 
   export_user_config:
     description: export the path to .npmrc as NPM_CONFIG_USERCONFIG
