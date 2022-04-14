@@ -7,7 +7,7 @@ sets up an .npmrc file that points to GPR as a proxy
 [![super linter][super-linter-img]][super-linter-url]
 [![semantic][semantic-img]][semantic-url]
 
-Allows you to use the [GitHub Package Registry as a proxy](https://github.blog/2019-09-11-proxying-packages-with-github-package-registry-and-other-updates/) for npm operations *(install, publish, etc ...)* so you don't have to manually distinguish between internal dependencies registry url and public ones.
+Allows you to use the [GitHub Package Registry as a proxy][] for npm operations *(install, publish, etc ...)* so you don't have to manually distinguish between internal dependencies registry url and public ones.
 
 ## Usage
 
@@ -39,8 +39,12 @@ jobs:
 | scope                | ❌        | `${{ github.repository_owner }}` | the "npm scope", typically this will be your GitHub username / org name |
 | path                 | ❌        | `${{ github.workspace }}/.npmrc` | where to store the `.npmrc` file                                        |
 | export\_user\_config | ❌        | `false`                          | export the path to `.npmrc` as `NPM_CONFIG_USERCONFIG`                  |
+| proxy                | ❌        | `false`                          | enable the GitHub npm packages proxy for npm                            |
 
-> ***Note**: your github token should have the [appropriate scopes](https://docs.github.com/en/packages/guides/about-github-container-registry#about-scopes-and-permissions-for-github-container-registry)*
+> ***Note**: your github token should have the [appropriate scopes][]*
+
+  [GitHub Package Registry as a proxy]: https://github.blog/2019-09-11-proxying-packages-with-github-package-registry-and-other-updates/
+  [appropriate scopes]: https://docs.github.com/en/packages/guides/about-github-container-registry#about-scopes-and-permissions-for-github-container-registry
 
 ----
 > Author: [Ahmad Nassri](https://www.ahmadnassri.com/) &bull;
