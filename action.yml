@@ -27,13 +27,21 @@ inputs:
     default: 'false'
     required: false
 
+  always_auth:
+    description: set the always-auth flag to true
+    default: 'false'
+    required: false
+
 runs:
   using: composite
   steps:
     - shell: bash
       run: |
         npm config --userconfig "${{ inputs.path }}" set //npm.pkg.github.com/:_authToken "${{ inputs.token }}"
-        npm config --userconfig "${{ inputs.path }}" set always-auth true
+
+        if [ "${{ input.always_auth" == "true" ]; then
+          npm config --userconfig "${{ inputs.path }}" set always-auth true
+        fi
 
         if [ "${{ inputs.proxy }}" != "true" ]; then
           npm config --userconfig "${{ inputs.path }}" set @${{ inputs.scope }}:registry="https://npm.pkg.github.com"

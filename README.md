@@ -40,6 +40,7 @@ jobs:
 | path                 | ❌        | `${{ github.workspace }}/.npmrc` | where to store the `.npmrc` file                                        |
 | export\_user\_config | ❌        | `false`                          | export the path to `.npmrc` as `NPM_CONFIG_USERCONFIG`                  |
 | proxy                | ❌        | `false`                          | enable the GitHub npm packages proxy for npm                            |
+| always\_auth         | ❌        | `false`                          | set `always-auth true` flag                                             |
 
 > ***Note**: your github token should have the [appropriate scopes][]*
 
