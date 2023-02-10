@@ -39,7 +39,7 @@ runs:
       run: |
         npm config --userconfig "${{ inputs.path }}" set //npm.pkg.github.com/:_authToken "${{ inputs.token }}"
 
-        if [ "${{ inputs.always_auth" == "true" ]; then
+        if [ "${{ inputs.always_auth }}" == "true" ]; then
           npm config --userconfig "${{ inputs.path }}" set always-auth true
         fi
 
