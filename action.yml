@@ -33,7 +33,6 @@ runs:
     - shell: bash
       run: |
         npm config --userconfig "${{ inputs.path }}" set //npm.pkg.github.com/:_authToken "${{ inputs.token }}"
-        npm config --userconfig "${{ inputs.path }}" set always-auth true
 
         if [ "${{ inputs.proxy }}" != "true" ]; then
           npm config --userconfig "${{ inputs.path }}" set @${{ inputs.scope }}:registry="https://npm.pkg.github.com"
