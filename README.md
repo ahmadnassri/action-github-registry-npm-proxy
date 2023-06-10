@@ -33,14 +33,13 @@ jobs:
 
 ### Inputs
 
-| input                | required | default                          | description                                                             |
-|----------------------|----------|----------------------------------|-------------------------------------------------------------------------|
-| token                | ❌        | `${{ github.token }}`            | the token to use with npm cli                                           |
-| scope                | ❌        | `${{ github.repository_owner }}` | the "npm scope", typically this will be your GitHub username / org name |
-| path                 | ❌        | `${{ github.workspace }}/.npmrc` | where to store the `.npmrc` file                                        |
-| export\_user\_config | ❌        | `false`                          | export the path to `.npmrc` as `NPM_CONFIG_USERCONFIG`                  |
-| proxy                | ❌        | `false`                          | enable the GitHub npm packages proxy for npm                            |
-| always\_auth         | ❌        | `false`                          | set `always-auth true` flag                                             |
+| input              | required | default                          | description                                                             |
+|--------------------|----------|----------------------------------|-------------------------------------------------------------------------|
+| token              | ❌       | `${{ github.token }}`            | the token to use with npm cli                                           |
+| scope              | ❌       | `${{ github.repository_owner }}` | the "npm scope", typically this will be your GitHub username / org name |
+| path               | ❌       | `${{ github.workspace }}/.npmrc` | where to store the `.npmrc` file                                        |
+| export_user_config | ❌       | `false`                          | export the path to `.npmrc` as `NPM_CONFIG_USERCONFIG`                  |
+| proxy              | ❌       | `false`                          | enable the GitHub npm packages proxy for npm                            |
 
 > ***Note**: your github token should have the [appropriate scopes][]*
 
