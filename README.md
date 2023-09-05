@@ -46,7 +46,7 @@ jobs:
   npm:
     steps:
       - uses: actions/checkout@v3
-      - uses: ahmadnassri/action-github-registry-npm-proxy@v3
+      - uses: ahmadnassri/action-github-registry-npm-proxy@v5
 ```
 
 > ###### result: `.npmrc`
@@ -66,7 +66,7 @@ jobs:
 set a custom path to `.npmrc` file and export it as `NPM_CONFIG_USERCONFIG` environment variable
 
 ``` yaml
-- uses: ahmadnassri/action-github-registry-npm-proxy@v2
+- uses: ahmadnassri/action-github-registry-npm-proxy@v5
   with:
     path: ./path-to-package/.npmrc
     export_config: true
@@ -84,7 +84,7 @@ set a custom path to `.npmrc` file and export it as `NPM_CONFIG_USERCONFIG` envi
 don't use the proxy, just set the registry url to the github registry for current scope
 
 ``` yaml
-- uses: ahmadnassri/action-github-registry-npm-proxy@v2
+- uses: ahmadnassri/action-github-registry-npm-proxy@v5
   with:
     proxy: false
 ```
@@ -104,7 +104,7 @@ don't use the proxy, just set the registry url to the github registry for curren
 custom scope (e.g. packages from another github account/org)
 
 ``` yaml
-- uses: ahmadnassri/action-github-registry-npm-proxy@v2
+- uses: ahmadnassri/action-github-registry-npm-proxy@v5
   with:
     scope: "@my-org"
     token: ${{ secrets.github-personal-access-token }}
