@@ -14,7 +14,7 @@ Allows you to use the [GitHub Package Registry as a proxy][] for npm operations 
 No, the `setup-node` action results in an `.npmrc` file that looks like this:
 
 ``` ini
-//npm.pkg.github.com/:\_authToken=XXXXX-XXXXX-XXXXX-XXXXX
+//npm.pkg.github.com/:_authToken=XXXXX-XXXXX-XXXXX-XXXXX
 @scope:registry=https://npm.pkg.github.com
 ```
 
@@ -23,7 +23,7 @@ This means that npm will continue to use the public npm registry for any package
 If you want to use GitHub Package Registry as a proxy to the default npm registry, you need to use an `.npmrc` file that looks like this:
 
 ``` ini
-//npm.pkg.github.com/:\_authToken=XXXXX-XXXXX-XXXXX-XXXXX
+//npm.pkg.github.com/:_authToken=XXXXX-XXXXX-XXXXX-XXXXX
 registry=https://npm.pkg.github.com/scope/
 ```
 
@@ -75,7 +75,7 @@ set a custom path to `.npmrc` file and export it as `NPM_CONFIG_USERCONFIG` envi
 > ###### result: `./path-to-package/.npmrc`
 >
 > ``` ini
-> //npm.pkg.github.com/:\_authToken=XXX-XXX
+> //npm.pkg.github.com/:_authToken=XXX-XXX
 > registry=https://npm.pkg.github.com/ahmadnassri
 > ```
 
@@ -95,7 +95,7 @@ don't use the proxy, just set the registry url to the github registry for curren
 ###### result: `.npmrc`
 
 ``` ini
-//npm.pkg.github.com/:\_authToken=XXX-XXX
+//npm.pkg.github.com/:_authToken=XXX-XXX
 @ahmadnassri:registry=https://npm.pkg.github.com
 ```
 
@@ -113,7 +113,7 @@ custom scope (e.g. packages from another github account/org)
 ###### result: `.npmrc`
 
 ``` ini
-//npm.pkg.github.com/:\_authToken=XXX-XXX
+//npm.pkg.github.com/:_authToken=XXX-XXX
 registry=https://npm.pkg.github.com/@my-org/
 ```
 
