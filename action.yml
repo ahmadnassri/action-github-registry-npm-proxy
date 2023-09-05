@@ -22,9 +22,9 @@ inputs:
     description: enable proxy mode
     default: 'false'
 
-  export_user_config:
+  export_config:
     description: export the path to .npmrc as NPM_CONFIG_USERCONFIG
-    default: 'false'
+    default: 'true'
     required: false
 
 runs:
@@ -37,10 +37,10 @@ runs:
         if [ "${{ inputs.proxy }}" != "true" ]; then
           npm config --userconfig "${{ inputs.path }}" set @${{ inputs.scope }}:registry="https://npm.pkg.github.com"
         else
-          npm config --userconfig "${{ inputs.path }}" set registry="https://npm.pkg.github.com/${{ inputs.scope }}"
+          npm config --userconfig "${{ inputs.path }}" set registry="https://npm.pkg.github.com/${{ inputs.scope }}/"
         fi
 
-        if [ "${{ inputs.export_user_config }}" != "false" ]; then
+        if [ "${{ inputs.export_config }}" != "false" ]; then
           echo "NPM_CONFIG_USERCONFIG=${{ inputs.path }}" >> $GITHUB_ENV
         fi
 
