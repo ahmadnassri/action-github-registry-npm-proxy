@@ -43,4 +43,3 @@ runs:
         if [ "${{ inputs.export_config }}" != "false" ]; then
           echo "NPM_CONFIG_USERCONFIG=${{ inputs.path }}" >> $GITHUB_ENV
         fi
-
