@@ -14,7 +14,7 @@ Allows you to use the [GitHub Package Registry as a proxy][] for npm operations 
 No, the `setup-node` action results in an `.npmrc` file that looks like this:
 
 ``` ini
-//npm.pkg.github.com/:_authToken=XXXXX-XXXXX-XXXXX-XXXXX
+//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}
 @scope:registry=https://npm.pkg.github.com
 ```
 
@@ -23,7 +23,7 @@ This means that npm will continue to use the public npm registry for any package
 If you want to use GitHub Package Registry as a proxy to the default npm registry, you need to use an `.npmrc` file that looks like this:
 
 ``` ini
-//npm.pkg.github.com/:_authToken=XXXXX-XXXXX-XXXXX-XXXXX
+//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}
 registry=https://npm.pkg.github.com/scope/
 ```
 
@@ -47,18 +47,20 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: ahmadnassri/action-github-registry-npm-proxy@v5
+      - run: npm ci
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 > ###### result: `.npmrc`
 >
 > ``` ini
-> //npm.pkg.github.com/:_authToken=XXX-XXX
+> //npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}
 > registry=https://npm.pkg.github.com/ahmadnassri/
 > ```
 
 > **Warning**  
-> this will use the [GitHub Action Token][] by default!  
-> you might want to specify a token value if you're installing private packages  
+> you should specify a token value if you're installing private packages  
 > or packages from other repositories within the same org
 
 ###### Example
@@ -70,12 +72,17 @@ set a custom path to `.npmrc` file and export it as `NPM_CONFIG_USERCONFIG` envi
   with:
     path: ./path-to-package/.npmrc
     export_config: true
+
+- run: npm ci
+  working-directory: ./path-to-package
+  env:
+    NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 > ###### result: `./path-to-package/.npmrc`
 >
 > ``` ini
-> //npm.pkg.github.com/:_authToken=XXX-XXX
+> //npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}
 > registry=https://npm.pkg.github.com/ahmadnassri
 > ```
 
@@ -95,7 +102,7 @@ don't use the proxy, just set the registry url to the github registry for curren
 ###### result: `.npmrc`
 
 ``` ini
-//npm.pkg.github.com/:_authToken=XXX-XXX
+//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}
 @ahmadnassri:registry=https://npm.pkg.github.com
 ```
 
@@ -106,14 +113,14 @@ custom scope (e.g. packages from another github account/org)
 ``` yaml
 - uses: ahmadnassri/action-github-registry-npm-proxy@v5
   with:
-    scope: "@my-org"
+    scope: '@my-org'
     token: ${{ secrets.github-personal-access-token }}
 ```
 
 ###### result: `.npmrc`
 
 ``` ini
-//npm.pkg.github.com/:_authToken=XXX-XXX
+//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}
 registry=https://npm.pkg.github.com/@my-org/
 ```
 
@@ -121,10 +128,10 @@ registry=https://npm.pkg.github.com/@my-org/
 
 | input         | required | default                          | description                                                             |
 |---------------|----------|----------------------------------|-------------------------------------------------------------------------|
-| token         | ❌       | `${{ github.token }}`            | the token to use with npm cli                                           |
 | scope         | ❌       | `${{ github.repository_owner }}` | the "npm scope", typically this will be your GitHub username / org name |
 | path          | ❌       | `${{ github.workspace }}/.npmrc` | where to store the `.npmrc` file                                        |
 | export_config | ❌       | `false`                          | export the path to `.npmrc` as `NPM_CONFIG_USERCONFIG`                  |
+| token         | ❌       | `NODE_AUTH_TOKEN`                | environment variable name for the registry token                        |
 | proxy         | ❌       | `true`                           | enable/disable the GitHub npm packages proxy for npm                    |
 
 > **Warning**
@@ -132,7 +139,6 @@ registry=https://npm.pkg.github.com/@my-org/
 
   [GitHub Package Registry as a proxy]: https://github.blog/2019-09-11-proxying-packages-with-github-package-registry-and-other-updates/
   [`@actions/setup-node`]: https://github.com/actions/setup-node
-  [GitHub Action Token]: https://docs.github.com/en/actions/security-guides/automatic-token-authentication
   [appropriate scopes]: https://docs.github.com/en/packages/learn-github-packages/about-permissions-for-github-packages#about-scopes-and-permissions-for-package-registries
 
 ----

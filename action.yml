@@ -15,8 +15,8 @@ inputs:
     default: ${{ github.repository_owner }}
 
   token:
-    description: github token to use with npm
-    default: ${{ github.token }}
+    description: environment variable name for the registry token
+    default: "NODE_AUTH_TOKEN"
 
   proxy:
     description: enable proxy mode
@@ -32,7 +32,7 @@ runs:
   steps:
     - shell: bash
       run: |
-        npm config --userconfig "${{ inputs.path }}" set //npm.pkg.github.com/:_authToken "${{ inputs.token }}"
+        npm config --userconfig "${{ inputs.path }}" set //npm.pkg.github.com/:_authToken '${${{ inputs.token }}}'
 
         if [ "${{ inputs.proxy }}" != "true" ]; then
           npm config --userconfig "${{ inputs.path }}" set @${{ inputs.scope }}:registry="https://npm.pkg.github.com"
